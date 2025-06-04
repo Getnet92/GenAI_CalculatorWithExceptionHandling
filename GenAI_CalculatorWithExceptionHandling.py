@@ -1,4 +1,4 @@
-def addition(x, y): # function that returns the sum of the 2 float parameters
+def addition(x, y):# function that returns the sum of the 2 float parameters
     return x + y
 def subtraction(x, y): # function that returns the difference of the 2 float parameters
     return x - y
@@ -8,35 +8,40 @@ def division(x, y ): # function that returns the quotient of the 2 float paramet
     return x/y
 
 print("Welcome to the Recursive Artist program !")
+num1 = 0 # initializing values with zero
+num2 = 0 # initializing values with zero
 choice = 0 # default value to make sure the loop starts to run
 while choice != 5:
     try:
-        choice = int(input("Choose an option: \n 1. Addition \n 2. Subtraction \n 3 .Multiplication \n 4. Division \n 5. Exit \n")) # cast to into to make sure the choice is an integer and not a 
+        choice = int(input("Choose an option: \n 1. Addition \n 2. Subtraction \n 3 .Multiplication \n 4. Division \n 5. Exit \n")) # cast to into to make sure the choice is an integer and not anything else
         if(choice > 5 or choice < 1 ): # if statement to check if answer is within choice
-            choice = int(input(" please enter a whole number form 1 - 5: ")) # appears only if the choice is not from 1 -5 but is the right type, float
-        else: # code to run if the choice picked is correct
-            try:
+            print("Make sure your number is between 1 - 5")
+            continue
+    except ValueError:
+        print("Error: invalid input. please enter a whole number")
+    else:
+        try:
                 num1 = float(input("Enter the first number: ")) # prompting and recieving the first number
                 num2 = float(input("Enter the second number: ")) # prompting and recieving the second number
-            except ValueError:# causing an error when the value is the wrong data type
-                    print("The number you entered is not a float. ") # error message
-                    continue # reseting the while loop when the number is entered is the wrong type
-            if choice == 1: # runs when user picks 1
-                print("The sum of " + str(num1) + " and " + str(num2)+ " is " + str(addition(num1, num2))) # displays the 2 numbers teh user inputed and the result after calculation
-            elif choice == 2: 
-                print("The difference between " + str(num1) + " and " + str(num2)+ " is " + str(subtraction(num1, num2))) # displays the 2 numbers teh user inputed and the result after calculation
-            elif choice ==3:
-                print("The product of " + str(num1) + " and " + str(num2)+ " is " + str(multiplication(num1, num2))) # displays the 2 numbers teh user inputed and the result after calculation
-            elif choice == 4:
-                try: # specific exception handling for the division function
-                    print("The quotient of " + str(num1) + " and " + str(num2)+ " is " + str(division(num1, num2))) 
-                except ZeroDivisionError: # message displayed when user tries to divide by zero
-                    print("The second number is zero, you can't divide by zero ") # message indicatig that the user assigned 0 to num2 causing the error
-                except ValueError:
-                    print("The number you have entered isn't a whole number") # messsage indecating the user didn't pick a number
-            elif choice == 5: # exits the program since this is the while loop termination codition after displaying the message
-                print("Exiting program.")
-    except ValueError: # error caused if the user doesn't enter a number
-        print("Error: invalid input. \n please enter a whole number form 1 - 5") # message to be displayed if the user doesn't input the right number
+        except ValueError: # error message when the variable type is wrong
+            print("The number you entered is not a float. ")
+            continue # Starts another iteration sinve there is an error, makes sure the rest of the code doesn't run
+        if choice == 1:
+            print("The sum of " + str(num1) + " and " + str(num2)+ " is " + str(addition(num1, num2)))# displays the 2 numbers theh user inputed and the result after calculation
+        elif choice == 2: 
+            print("The difference between " + str(num1) + " and " + str(num2)+ " is " + str(subtraction(num1, num2))) # displays the 2 numbers the user inputed and the result after calculation
+        elif choice ==3:
+            print("The product of " + str(num1) + " and " + str(num2)+ " is " + str(multiplication(num1, num2))) # displays the 2 numbers the user inputed and the result after calculation
+        elif choice == 4:
+            try:# specific try/except for the division() function
+                print("The quotient of " + str(num1) + " and " + str(num2)+ " is " + str(division(num1, num2))) # displays the 2 numbers the user inputed and the result after calculation
+            except ZeroDivisionError:# error message when user tries to divide by zero, they assing num2 to 0 then run the divide() function
+                print("The second number is zero, you can't divide by zero ")
+            except ValueError: 
+                print("The number you have entered isn't a whole number")
+        elif choice == 5:
+            print("Exiting program.")
+    finally: # displays the last pick to let user know what was their last option wheter the code runs or not
+        print("You last picked: " + str(choice))
 
-print("Program terminated restart to play again.")
+print("Program terminated restart to play again.") # message displayed if the loop is terminated the right way, the proper value "5" is entered
